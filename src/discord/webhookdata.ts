@@ -1,8 +1,8 @@
 import { Client, MessageEmbed } from 'discord.js';
 import {
   numMinutesCache,
-  priceCLNYperONE,
-  priceCLNYperUSD,
+  priceHLYperONE,
+  priceHLYperUSD,
   priceONEperUSD,
 } from '../replies/price.command';
 import {
@@ -10,7 +10,6 @@ import {
   DISCORD_REALTIME_CHANNEL_WEBHOOK_ID,
   DISCORD_REALTIME_CHANNEL_WEBHOOK_TOKEN,
 } from '../secrets';
-import { escapeDot } from '../utils/utils';
 
 const username = 'HolyGrail Data';
 const avatarUrl =
@@ -64,17 +63,18 @@ export const updateRealtimeChannelPriceData = async (discordClient: Client) => {
   }
 };
 
+const numDecimalPlaces = 7;
 const getEmbedMessage = async (): Promise<MessageEmbed[]> => {
   return [
     new MessageEmbed()
       .setDescription(
-        priceCLNYperONE === 0 || priceONEperUSD === 0 || priceCLNYperUSD === 0
+        priceHLYperONE === 0 || priceONEperUSD === 0 || priceHLYperUSD === 0
           ? 'Fetching prices...'
-          : `1 HLY \\= **${escapeDot(priceCLNYperONE.toFixed(3))}** ONE
-          1 ONE \\= **$${escapeDot(
-            priceONEperUSD.toFixed(3)
-          )}** (WONE\\-1USDC pair)
-          1 HLY \\= **$${escapeDot(priceCLNYperUSD.toFixed(3))}**`
+          : `1 HLY = **${priceHLYperONE.toFixed(numDecimalPlaces)}** ONE
+          1 ONE = **$${priceONEperUSD.toFixed(
+            numDecimalPlaces
+          )}** (WONE-1USDC pair)
+          1 HLY = **$${priceHLYperUSD.toFixed(numDecimalPlaces)}**`
       )
       .setAuthor({
         name: 'Token Prices',

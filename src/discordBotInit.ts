@@ -23,12 +23,6 @@ discordClient.once('ready', async () => {
   // make sure all guilds are in cache
   await discordClient.guilds.fetch();
 
-  // // clear all guild commands
-  // // useful when moving to global commands from guild commands
-  // await discordClient.clearApplicationCommands(
-  //   ...discordClient.guilds.cache.map((g) => g.id)
-  // );
-
   // init all application commands
   await discordClient.initApplicationCommands({
     guild: { log: true },
@@ -54,8 +48,6 @@ discordClient.on('messageCreate', (message: Message) => {
 });
 
 export async function discordBotInit() {
-  // with cjs
-  // await importx(__dirname + '/{discord,replies}/**/*.{ts,js}');
   // with ems
   await importx(
     dirname(import.meta.url) + '/{discord,replies,resources,utils}/**/*.{ts,js}'
