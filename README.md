@@ -20,6 +20,6 @@ export const DISCORD_REALTIME_CHANNEL_WEBHOOK_TOKEN = 'eee';
 
 ### Running the Application
 
-`yarn build` then `yarn start`
+`yarn build` then `yarn start`. After the application loads, you should see something like this in your discord voice channel:
 
-![alt text](data/wwebhookbot.PNG)
+![alt text](data/webhookbot.PNG)
