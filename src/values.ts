@@ -1,0 +1,6 @@
+export const HLY = '0x0D625029E21540aBdfAFa3BFC6FD44fB4e0A66d0';
+
+export const WONE_CONTRACT = '0xcf664087a5bb0237a0bad6742852ec6c8d69a27a';
+export const USDC_CONTRACT = '0x985458e523db3d53125813ed68c274899e9dfab4';
+export const HLY_PAIR = '0xcd818813f038a4d1a27c84d24d74bbc21551fa83';
+export const USDC_PAIR = '0xbf255d8c30dbab84ea42110ea7dc870f01c0013a';
