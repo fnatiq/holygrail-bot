@@ -18,16 +18,17 @@ export const numMinutesCache = 1;
 (async () => {
   while (true) {
     try {
-      const oneInUSD =
+      const onePerUSD =
         (await HLYTokenContract.methods.getLatestONEPrice().call()) * 1e-8;
 
-      const hlyInONE =
+      // why does pair address give HLY/USD instead of HLY/ONE?
+      const onePerHLY =
         (await HLYTokenContract.methods
           .getLatestTokenPrice(HLY_PAIR, 1)
-          .call()) * 1e-23;
+          .call()) * 1e-18;
 
-      priceHLYperONE = hlyInONE;
-      priceONEperUSD = oneInUSD;
+      priceONEperUSD = onePerUSD;
+      priceHLYperONE = 1 / onePerHLY;
       priceHLYperUSD = priceHLYperONE * priceONEperUSD;
     } catch (error) {
       console.log('pricing error', error);

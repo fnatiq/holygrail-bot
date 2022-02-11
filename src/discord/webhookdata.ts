@@ -13,7 +13,7 @@ import {
 
 const username = 'HolyGrail Data';
 const avatarUrl =
-  'https://sea2.discourse-cdn.com/business7/user_avatar/talk.harmony.one/holygrail/240/6010_2.png';
+  'https://holygrail.one/holygrail.png';
 
 export const updateRealtimeChannelPriceData = async (discordClient: Client) => {
   try {
@@ -70,16 +70,15 @@ const getEmbedMessage = async (): Promise<MessageEmbed[]> => {
       .setDescription(
         priceHLYperONE === 0 || priceONEperUSD === 0 || priceHLYperUSD === 0
           ? 'Fetching prices...'
-          : `1 HLY = **${priceHLYperONE.toFixed(numDecimalPlaces)}** ONE
-          1 ONE = **$${priceONEperUSD.toFixed(
+          : `1 HLY = **${priceHLYperONE.toFixed(numDecimalPlaces)}** ONE (**$${priceHLYperUSD.toFixed(numDecimalPlaces)}**)
+1 ONE = **$${priceONEperUSD.toFixed(
             numDecimalPlaces
-          )}** (WONE-1USDC pair)
-          1 HLY = **$${priceHLYperUSD.toFixed(numDecimalPlaces)}**`
+          )}** (WONE-1USDC pair)`
       )
       .setAuthor({
         name: 'Token Prices',
         iconURL:
-          'https://sea2.discourse-cdn.com/business7/user_avatar/talk.harmony.one/holygrail/240/6010_2.png',
+          'https://holygrail.one/holygrail.png',
       })
       .setColor('#b99d5d'),
   ];
