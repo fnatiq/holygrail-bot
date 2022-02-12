@@ -11,6 +11,7 @@ let DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
 let DISCORD_REALTIME_CHANNEL_ID = process.env.DISCORD_REALTIME_CHANNEL_ID;
 let DISCORD_REALTIME_CHANNEL_WEBHOOK_ID = process.env.DISCORD_REALTIME_CHANNEL_WEBHOOK_ID;
 let DISCORD_REALTIME_CHANNEL_WEBHOOK_TOKEN = process.env.DISCORD_REALTIME_CHANNEL_WEBHOOK_TOKEN;
+let DISCORD_REALTIME_CHANNEL_WEBHOOK_MESSAGE_ID = process.env.DISCORD_REALTIME_CHANNEL_WEBHOOK_MESSAGE_ID;
 
 const username = 'HolyGrail Data';
 const avatarUrl = 'https://holygrail.one/holygrail.png';
@@ -35,7 +36,7 @@ export const updateRealtimeChannelPriceData = async (discordClient: Client) => {
       //   });
       //   const priceMessageId = priceMessage.id;
 
-      const priceMessageId = DISCORD_REALTIME_CHANNEL_WEBHOOK_MESSAGE_ID;
+      const priceMessageId = DISCORD_REALTIME_CHANNEL_WEBHOOK_MESSAGE_ID!;
 
       (async () => {
         while (true) {
