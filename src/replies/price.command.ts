@@ -1,6 +1,6 @@
 import Web3 from 'web3';
-import { HLY, HLY_PAIR } from '../values';
-import HLYAbi from '../resources/HLY.json';
+import { HLY, HLY_PAIR } from '../values.js';
+import HLYAbi from '../resources/HLY.json' assert {type: "json"};
 import { AbiItem } from 'web3-utils';
 
 const web3 = new Web3('https://api.harmony.one');

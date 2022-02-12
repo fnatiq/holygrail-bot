@@ -1,3 +1,3 @@
-import { discordBotInit } from './discordBotInit';
+import { discordBotInit } from './discordBotInit.js';
 
 discordBotInit();

@@ -2,8 +2,15 @@ import 'reflect-metadata';
 import { Intents, Interaction, Message } from 'discord.js';
 import { Client } from 'discordx';
 import { dirname, importx } from '@discordx/importer';
-import { DISCORD_BOT_TOKEN, DISCORD_REALTIME_CHANNEL_ID, DISCORD_REALTIME_CHANNEL_WEBHOOK_ID, DISCORD_REALTIME_CHANNEL_WEBHOOK_TOKEN } from './secrets';
-import { updateRealtimeChannelPriceData } from './discord/webhookdata';
+import { updateRealtimeChannelPriceData } from './discord/webhookdata.js';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
+let DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
+let DISCORD_REALTIME_CHANNEL_ID = process.env.DISCORD_REALTIME_CHANNEL_ID;
+let DISCORD_REALTIME_CHANNEL_WEBHOOK_ID = process.env.DISCORD_REALTIME_CHANNEL_WEBHOOK_ID;
+let DISCORD_REALTIME_CHANNEL_WEBHOOK_TOKEN = process.env.DISCORD_REALTIME_CHANNEL_WEBHOOK_TOKEN;
 
 const discordClient = new Client({
   intents: [
@@ -29,7 +36,7 @@ discordClient.once('ready', async () => {
     global: { log: true },
   });
 
-  await discordClient.channels.fetch(DISCORD_REALTIME_CHANNEL_ID);
+  await discordClient.channels.fetch(DISCORD_REALTIME_CHANNEL_ID!);
 
   await updateRealtimeChannelPriceData(discordClient);
 
@@ -78,5 +85,5 @@ export async function discordBotInit() {
     dirname(import.meta.url) + '/{discord,replies,resources,utils}/**/*.{ts,js}'
   );
 
-  await discordClient.login(DISCORD_BOT_TOKEN);
+  await discordClient.login(DISCORD_BOT_TOKEN!);
 }
