@@ -8,12 +8,12 @@ import {
 import {
   DISCORD_REALTIME_CHANNEL_ID,
   DISCORD_REALTIME_CHANNEL_WEBHOOK_ID,
+  DISCORD_REALTIME_CHANNEL_WEBHOOK_MESSAGE_ID,
   DISCORD_REALTIME_CHANNEL_WEBHOOK_TOKEN,
 } from '../secrets';
 
 const username = 'HolyGrail Data';
-const avatarUrl =
-  'https://holygrail.one/holygrail.png';
+const avatarUrl = 'https://holygrail.one/holygrail.png';
 
 export const updateRealtimeChannelPriceData = async (discordClient: Client) => {
   try {
@@ -26,36 +26,38 @@ export const updateRealtimeChannelPriceData = async (discordClient: Client) => {
         DISCORD_REALTIME_CHANNEL_WEBHOOK_TOKEN
       );
 
-      try {
-        let embedMessage = await getEmbedMessage();
-        const priceMessage = await webhook.send({
-          username: username,
-          avatarURL: avatarUrl,
-          embeds: embedMessage,
-        });
-        const priceMessageId = priceMessage.id;
+      // try {
+      //   let embedMessage = await getEmbedMessage();
+      //   const priceMessage = await webhook.send({
+      //     username: username,
+      //     avatarURL: avatarUrl,
+      //     embeds: embedMessage,
+      //   });
+      //   const priceMessageId = priceMessage.id;
 
-        (async () => {
-          while (true) {
-            try {
-              let embedMessage = await getEmbedMessage();
-              webhook.editMessage(priceMessageId, {
-                embeds: embedMessage,
-              });
+      const priceMessageId = DISCORD_REALTIME_CHANNEL_WEBHOOK_MESSAGE_ID;
 
-              await new Promise((resolve) =>
-                setTimeout(resolve, 1000 * 60 * numMinutesCache)
-              );
-            } catch (err) {
-              console.log('webhook edit message error');
-              console.log(err);
-            }
+      (async () => {
+        while (true) {
+          try {
+            let embedMessage = await getEmbedMessage();
+            webhook.editMessage(priceMessageId, {
+              embeds: embedMessage,
+            });
+
+            await new Promise((resolve) =>
+              setTimeout(resolve, 1000 * 60 * numMinutesCache)
+            );
+          } catch (err) {
+            console.log('webhook edit message error');
+            console.log(err);
           }
-        })();
-      } catch (embedMessageErr) {
-        console.log('fetching embed message error');
-        console.log(embedMessageErr);
-      }
+        }
+      })();
+      // } catch (embedMessageErr) {
+      //   console.log('fetching embed message error');
+      //   console.log(embedMessageErr);
+      // }
     }
   } catch (err) {
     console.log('webhook error');
@@ -70,15 +72,14 @@ const getEmbedMessage = async (): Promise<MessageEmbed[]> => {
       .setDescription(
         priceHLYperONE === 0 || priceONEperUSD === 0 || priceHLYperUSD === 0
           ? 'Fetching prices...'
-          : `1 HLY = **${priceHLYperONE.toFixed(numDecimalPlaces)}** ONE (**$${priceHLYperUSD.toFixed(numDecimalPlaces)}**)
-1 ONE = **$${priceONEperUSD.toFixed(
-            numDecimalPlaces
-          )}** (WONE-1USDC pair)`
+          : `1 HLY = **${priceHLYperONE.toFixed(
+              numDecimalPlaces
+            )}** ONE (**$${priceHLYperUSD.toFixed(numDecimalPlaces)}**)
+1 ONE = **$${priceONEperUSD.toFixed(numDecimalPlaces)}** (WONE-1USDC pair)`
       )
       .setAuthor({
         name: 'Token Prices',
-        iconURL:
-          'https://holygrail.one/holygrail.png',
+        iconURL: 'https://holygrail.one/holygrail.png',
       })
       .setColor('#b99d5d'),
   ];
