@@ -75,7 +75,9 @@ const getEmbedMessage = async (): Promise<MessageEmbed[]> => {
           : `1 HLY = **${priceHLYperONE.toFixed(
               numDecimalPlaces
             )}** ONE (**$${priceHLYperUSD.toFixed(numDecimalPlaces)}**)
-1 ONE = **$${priceONEperUSD.toFixed(numDecimalPlaces)}** (WONE-1USDC pair)`
+1 ONE = **$${priceONEperUSD.toFixed(numDecimalPlaces)}** (WONE-1USDC pair)
+
+Updated every **1** minute`
       )
       .setAuthor({
         name: 'Token Prices',
