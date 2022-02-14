@@ -3,3 +3,5 @@ src/secrets.ts
 build/*
 !build/.gitkeep
 .vscode
+.env
+k8s/*

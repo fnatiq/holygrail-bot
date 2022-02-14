@@ -4,13 +4,14 @@ import {
   priceHLYperONE,
   priceHLYperUSD,
   priceONEperUSD,
-} from '../replies/price.command';
-import {
-  DISCORD_REALTIME_CHANNEL_ID,
-  DISCORD_REALTIME_CHANNEL_WEBHOOK_ID,
-  DISCORD_REALTIME_CHANNEL_WEBHOOK_MESSAGE_ID,
-  DISCORD_REALTIME_CHANNEL_WEBHOOK_TOKEN,
-} from '../secrets';
+} from '../replies/price.command.js';
+import 'dotenv/config'
+
+let DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
+let DISCORD_REALTIME_CHANNEL_ID = process.env.DISCORD_REALTIME_CHANNEL_ID;
+let DISCORD_REALTIME_CHANNEL_WEBHOOK_ID = process.env.DISCORD_REALTIME_CHANNEL_WEBHOOK_ID;
+let DISCORD_REALTIME_CHANNEL_WEBHOOK_TOKEN = process.env.DISCORD_REALTIME_CHANNEL_WEBHOOK_TOKEN;
+let DISCORD_REALTIME_CHANNEL_WEBHOOK_MESSAGE_ID = process.env.DISCORD_REALTIME_CHANNEL_WEBHOOK_MESSAGE_ID;
 
 const username = 'HolyGrail Data';
 const avatarUrl = 'https://holygrail.one/holygrail.png';
@@ -18,11 +19,11 @@ const avatarUrl = 'https://holygrail.one/holygrail.png';
 export const updateRealtimeChannelPriceData = async (discordClient: Client) => {
   try {
     const realtimeChannel = discordClient.channels.cache.get(
-      DISCORD_REALTIME_CHANNEL_ID
+      DISCORD_REALTIME_CHANNEL_ID!
     );
     if (realtimeChannel) {
       const webhook = await realtimeChannel.client.fetchWebhook(
-        DISCORD_REALTIME_CHANNEL_WEBHOOK_ID,
+        DISCORD_REALTIME_CHANNEL_WEBHOOK_ID!,
         DISCORD_REALTIME_CHANNEL_WEBHOOK_TOKEN
       );
 
@@ -35,7 +36,7 @@ export const updateRealtimeChannelPriceData = async (discordClient: Client) => {
       //   });
       //   const priceMessageId = priceMessage.id;
 
-      const priceMessageId = DISCORD_REALTIME_CHANNEL_WEBHOOK_MESSAGE_ID;
+      const priceMessageId = DISCORD_REALTIME_CHANNEL_WEBHOOK_MESSAGE_ID!;
 
       (async () => {
         while (true) {
